@@ -20,11 +20,11 @@ export default class ProjectApi {
     return this.api.get(`${this.ENDPOINT}/${id}`);
   }
 
-  public async createProject(project: any) {
+  public async createProject(project: Pick<Project, "name">) {
     return this.api.post(this.ENDPOINT, project);
   }
 
-  public async updateProject(id: string, project: any) {
+  public async updateProject(id: string, project: Pick<Project, "name">) {
     return this.api.put(`${this.ENDPOINT}/${id}`, project);
   }
 
