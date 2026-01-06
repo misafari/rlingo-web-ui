@@ -1,11 +1,9 @@
-class Project {
-    public id?: string;
-    public name: string;
+export default class Project {
+  public id?: string;
+  public name: string;
 
-    constructor(prev?: Project) {
-        this.id = prev?.id ?? undefined;
-        this.name = prev?.name ?? '';
-    }
+  constructor(prev?: Project) {
+    this.id = prev?.id ?? undefined;
+    this.name = prev?.name ?? "";
+  }
 }
-
-export default Project;

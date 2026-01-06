@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import ProjectListPage from "../../view/pages/projects/list/Project.list.page";
-import { fetchAllProjectsOptions } from "../../services/query/useProjects";
+import {
+  fetchAllProjectsOptions,
+  useSuspenseQueryGetAllProjects,
+} from "../../services/query/useProjects";
 
 export const Route = createFileRoute("/projects/")({
   loader: async ({ context: { queryClient } }) => {
@@ -10,5 +13,6 @@ export const Route = createFileRoute("/projects/")({
 });
 
 function RouteComponent() {
-  return <ProjectListPage />;
+  const { data } = useSuspenseQueryGetAllProjects();
+  return <ProjectListPage projects={data} />;
 }

@@ -14,7 +14,7 @@ export const fetchAllProjectsOptions = {
   queryFn: () => projectApi.getProjects(),
 };
 
-export const useAllProjects = () => {
+export const useSuspenseQueryGetAllProjects = () => {
   return useSuspenseQuery(fetchAllProjectsOptions);
 };
 

@@ -13,15 +13,11 @@ import {
   ArrowUp,
   ArrowDown,
   Loader2,
-  AlertCircle,
   Plus,
   Pencil,
   Trash2,
 } from "lucide-react";
-import {
-  useAllProjects,
-  useDeleteProject,
-} from "../../../../services/query/useProjects";
+import { useDeleteProject } from "../../../../services/query/useProjects";
 import CreateNewProjectModal from "../create/CreatNewProject.modal";
 import EditProjectModal from "../edit/EditProject.modal";
 import type Project from "../../../../types/projects/Project.model";
@@ -190,8 +186,7 @@ function ActionsCell({ project }: { project: Project }) {
   );
 }
 
-export default function ProjectListPage() {
-  const { data: projects, isLoading, isError, error } = useAllProjects();
+export default function ProjectListPage({ projects }: { projects: Project[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -206,37 +201,6 @@ export default function ProjectListPage() {
       sorting,
     },
   });
-
-  if (isLoading) {
-    return (
-      <div className="flex min-h-[400px] items-center justify-center">
-        <div className="flex flex-col items-center space-y-4">
-          <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
-          <p className="text-sm text-gray-500">Loading projects...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="flex min-h-[400px] items-center justify-center">
-        <div className="flex flex-col items-center space-y-4 rounded-lg border border-red-200 bg-red-50 p-6">
-          <AlertCircle className="h-8 w-8 text-red-500" />
-          <div className="text-center">
-            <p className="font-semibold text-red-900">
-              Failed to load projects
-            </p>
-            <p className="mt-1 text-sm text-red-700">
-              {error instanceof Error
-                ? error.message
-                : "An unknown error occurred"}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
